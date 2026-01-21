@@ -1,0 +1,11 @@
+flowchart LR
+  DF["Dockerfile<br/>(构建脚本)"]
+  IMG["Image<br/>(镜像)"]
+  CTR["Container<br/>(容器)"]
+  REG["Registry<br/>(仓库)"]
+
+  DF -->|docker build| IMG
+  IMG -->|docker run / create| CTR
+
+  IMG -->|docker push| REG
+  REG -->|docker pull| IMG

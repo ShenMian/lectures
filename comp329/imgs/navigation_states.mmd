@@ -1,0 +1,27 @@
+stateDiagram-v2
+    %% Core state definitions
+    state "A* Planing" as AStarPlan
+    state "A* Following" as AStar
+    state "Bug 2" as Bug2
+    state "Self-Recovery" as Rescue
+    state "Goal Reached" as Success
+
+    %% Initialization logic
+    [*] --> AStarPlan: Goal set
+    state AStarPlan <<choice>>
+    AStarPlan --> AStar: Succeeds
+    AStarPlan --> Bug2: Fails
+
+    %% Transitions from A*
+    AStar --> Bug2: Path finished
+    AStar --> Rescue: Collision/Stuck
+
+    %% Bug2 to A* (periodic replanning)
+    Bug2 --> AStar: Replanning succeeds
+
+    %% Self-recovery logic (degrades to Bug2 after A* failure)
+    Rescue --> Bug2: Self-recovery completes
+
+    %% Success state
+    AStar --> Success: Goal reached
+    Bug2 --> Success: Goal reached

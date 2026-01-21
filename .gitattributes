@@ -1,0 +1,2 @@
+*.bib linguist-language=Typst
+*.otf filter=lfs diff=lfs merge=lfs -text

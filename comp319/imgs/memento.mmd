@@ -1,0 +1,17 @@
+classDiagram
+    class Originator {
+        -String state
+        +saveToMemento() Memento
+        +restoreFromMemento(memento: Memento)
+    }
+    class Memento {
+        -String state
+        +getSavedState() String
+    }
+    class Caretaker {
+        +manipulate(originator: Originator)
+    }
+
+    Originator ..> Memento : "creates"
+    Caretaker --> Originator : "manipulates"
+    Caretaker o-- Memento : "stores"

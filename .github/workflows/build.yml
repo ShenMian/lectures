@@ -1,0 +1,48 @@
+name: Build
+
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli@latest
+
+      - name: Install Inkscape
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y inkscape
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Convert mmd to svg
+        run: |
+          echo '{"args": ["--no-sandbox"]}' > puppeteer.json
+          cargo +nightly -Zscript mmd_to_svg.rs
+        env:
+          PUPPETEER_CONFIG: puppeteer.json
+
+      - name: Install Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Compile
+        run: |
+          for dir in */; do
+            if [ -f "${dir}main.typ" ]; then
+              name=$(basename "$dir" | tr '[:lower:]' '[:upper:]')
+              typst compile --font-path fonts "${dir}main.typ" "$name.pdf"
+            fi
+          done
+
+      - name: Upload rendered
+        uses: actions/upload-artifact@v6
+        with:
+          name: Rendered
+          path: "*.pdf"
