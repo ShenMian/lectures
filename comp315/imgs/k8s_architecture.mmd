@@ -1,0 +1,55 @@
+graph TB
+    subgraph Nodes [节点]
+        direction TB
+        subgraph Node1 [Node]
+            direction LR
+            n1_kbl[kubelet]
+            n1_kp[kube-proxy]
+            
+            subgraph n1_rt [Container Runtime]
+                direction TB
+                n1_p1((Pod))
+                n1_p2((Pod))
+            end
+        end
+
+        subgraph Node2 [Node]
+            direction LR
+            n2_kbl[kubelet]
+            n2_kp[kube-proxy]
+            
+            subgraph n2_rt [Container Runtime]
+                direction TB
+                n2_p1((Pod))
+                n2_p2((Pod))
+            end
+        end
+    end
+
+    subgraph ControlPlane ["控制平面 (Control Plane)"]
+        api((kube-apiserver))
+        
+        etcd[(etcd)]
+        cm[kube-controller-manager]
+        sched[kube-scheduler]
+        ccm[cloud-controller-manager]
+        
+        api --- etcd
+        api --- cm
+        api --- sched
+        api --- ccm
+    end
+
+    subgraph CloudServices ["云服务商托管服务 (Cloud)"]
+        direction TB
+        gke[Google GKE]
+        aks[Microsoft AKS]
+        eks[Amazon EKS]
+    end
+
+    Node1 --- api
+    Node2 --- api
+    ccm --- CloudServices
+    
+    style n1_kp stroke-dasharray: 5 5
+    style n2_kp stroke-dasharray: 5 5

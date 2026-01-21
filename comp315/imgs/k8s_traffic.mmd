@@ -1,0 +1,4 @@
+graph LR
+    INET[互联网] -->|请求| GW[Gateway 实现]
+    GW -->|路由/转发| SVC[Service]
+    SVC -->|负载均衡| POD[Pod]

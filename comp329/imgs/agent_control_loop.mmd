@@ -1,0 +1,20 @@
+graph LR
+    Environment["Environment"]
+    subgraph Agent
+        see["see"]
+        next["next"]
+        state{"state"}
+        action["action"]
+    end
+
+    Environment --> see
+    see --> next
+    next --> state
+    state --> next
+    state --> action
+    action --> Environment
+
+    style see fill:#4a6fa5,stroke:#333
+    style next fill:#4a6fa5,stroke:#333
+    style state fill:#4a6fa5,stroke:#333
+    style action fill:#4a6fa5,stroke:#333

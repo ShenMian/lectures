@@ -1,0 +1,48 @@
+graph TD
+    Foundation[基础阶段<br/>1-2周] --> Linux[Linux 基础<br/>命令行/文件系统]
+    Foundation --> WebBasics[Web基础<br/>HTML/CSS]
+
+    %% 三条并行路径
+    Linux --> Track1[后端路径]
+    WebBasics --> Track2[前端路径]
+    Linux --> Track3[DevOps 路径]
+    
+    %% 后端路径
+    Track1 --> Docker[Docker<br/>容器化<br/>🕐 1周]
+    Docker --> Network[网络基础<br/>TCP/IP/DNS<br/>🕐 1周]
+    Network --> Storage[存储方案<br/>数据库/Neo4j<br/>🕐 1-2周]
+    Storage --> K8sDeep[Kubernetes 深入<br/>Services/Istio<br/>🕐 2-3周]
+    
+    %% 前端路径
+    Track2 --> JS[JavaScript<br/>ES6+语法<br/>🕐 2周]
+    JS --> TS[TypeScript<br/>类型系统<br/>🕐 1周]
+    TS --> React[React<br/>Hooks/组件<br/>🕐 2周]
+    React --> Next[Next.js<br/>SSR/路由<br/>🕐 2周]
+    
+    %% DevOps 路径
+    Track3 --> Security[安全<br/>SELinux<br/>🕐 3-5天]
+    Security --> Ansible[Ansible<br/>IaC<br/>🕐 1周]
+    Ansible --> K8sBasic[Kubernetes 基础<br/>架构/Minikube<br/>🕐 1-2周]
+    K8sBasic --> CICD[CI/CD<br/>GitLab/ArgoCD<br/>🕐 1周]
+    
+    %% 汇合点
+    K8sDeep --> Integration[综合项目]
+    Next --> Integration
+    CICD --> Integration
+    
+    Integration --> Deploy[部署电商网站<br/>https://gitlab.com/comp315/website]
+    
+    %% 可选技术
+    Network -.-> Optional1[可选:<br/>Apache/NGINX]
+    TS -.-> Optional2[可选:<br/>Tailwind CSS]
+    
+    %% 样式
+    classDef backend fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
+    classDef frontend fill:#fff3e0,stroke:#ef6c00,stroke-width:3px
+    classDef devops fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    classDef milestone fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+    
+    class Docker,Network,Storage,K8sDeep backend
+    class JS,TS,React,Next frontend
+    class Security,Ansible,K8sBasic,CICD devops
+    class Integration,Deploy milestone
