@@ -5,9 +5,7 @@
 #show: codly-init
 #codly(languages: codly-languages)
 
-#set text(lang: "zh")
-
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(lang: "zh", font: ("New Computer Modern", "Source Han Serif SC"))
 
 #show: ilm.with(
   title: "计算机游戏开发高级专题笔记",

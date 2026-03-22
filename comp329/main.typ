@@ -11,9 +11,7 @@
 #let state = fletcher.node.with(shape: circle)
 #let trans = fletcher.edge.with(marks: "-|>")
 
-#set text(lang: "zh")
-
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(lang: "zh", font: ("New Computer Modern", "Source Han Serif SC"))
 
 #show: ilm.with(
   title: "自主移动机器人笔记",

@@ -12,9 +12,7 @@
 #let accept_state = fletcher.node.with(extrude: (-2.5, 0))
 #let trans = fletcher.edge.with(marks: "-|>")
 
-#set text(lang: "zh")
-
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(lang: "zh", font: ("New Computer Modern", "Source Han Serif SC"))
 
 #show: ilm.with(
   title: "计算理论导论笔记",

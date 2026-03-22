@@ -35,9 +35,7 @@
 
 #let notmodels = $cancel(models, length: #90%)$
 
-#set text(lang: "zh")
-
-#set text(font: ("New Computer Modern", "Source Han Serif SC"))
+#set text(lang: "zh", font: ("New Computer Modern", "Source Han Serif SC"))
 
 #show: ilm.with(
   title: "知识表示与推理笔记",
